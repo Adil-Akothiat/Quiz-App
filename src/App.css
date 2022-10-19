@@ -1,38 +1,334 @@
-.App {
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #f5f5f5;
+  font-family: sans-serif;
+  color: #232323;
+}
+main {
+  position: fixed;
+  width: 370px;
+  height: 600px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+@media screen and (min-width: 500px) {
+  main {
+    height: 550px;
+  }
+}
+@media screen and (max-width: 540px) {
+  main {
+    width: 90%;
+    height: 90%;
+  }
+}
+@media screen and (max-width: 260px) {
+  body {
+    min-width: 260px;
+  }
+}
+section {
+  position: absolute;
+  background-color: #fff;
+  width: 100%;
+  height: 100%;
+  box-shadow: 0px 0px 12px -7px #232323;
+  border-radius: 10px;
+  padding: 20px;
+  transition: all 1s ease;
+}
+section svg {
+  display: block;
+  fill: #028a3d;
+  margin: auto;
+  width: 60px;
+  height: 60px;
+}
+.js_quiz_p {
+  margin: 30px 0;
+}
+.js_quiz_p h2 {
+  font-size: 22px;
+  line-height: 1.8;
+}
+.js_quiz_p p {
+  font-size: 15px;
+  color: #949494;
+}
+.count_time span {
+  color: #028a3d;
+  font-size: 15px;
+}
+.count_time {
+  margin: 15px 0;
+  line-height: 1.5;
+}
+#start,
+.go_home button,
+.users_scores button,
+.view_score button,
+.save_score button {
+  display: block;
+  margin: auto;
+  width: 200px;
+  padding: 6px 0px;
+  background-color: #028a3d;
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0px 0px 10px -3px #232323;
+  margin-top: 40px;
+  transition: all 500ms ease;
+}
+#start:hover,
+.go_home button:hover,
+.users_scores button:hover,
+.view_score button:hover,
+.save_score button:hover {
+  transform: scale(1.1);
+}
+.btn_start {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 20px;
+}
+.hide {
+  transform: scale(0.5) translateY(-100%);
+  opacity: 0;
+}
+.score {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
 }
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#score_result {
+  font-size: 5rem;
 }
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.score span:last-child {
+  color: #757575;
+  font-size: 18px;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.go_home {
+  position: absolute;
+  left: 50%;
+  bottom: 20px;
+  transform: translateX(-50%);
+}
+.go_home button {
+  background-color: #0880d6;
+}
+.time_per_questions {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
-
-.App-link {
-  color: #61dafb;
+.time_per_questions span {
+  font-weight: 600;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.line_time {
+  position: relative;
+  width: 100%;
+  height: 8px;
+  border-radius: 4px;
+  background-color: #ddd;
+  margin: 5px 0;
+  overflow: hidden;
+}
+.line_time > span {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #028a3d;
+  height: 100%;
+  width: 100%;
+  transition: width 1s ease;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+}
+.start {
+  animation-name: decre;
+  animation-duration: 70s;
+}
+@keyframes decre {
+  form {
+    width: 100%;
   }
   to {
-    transform: rotate(360deg);
+    width: 0%;
   }
+}
+.questions {
+  margin-top: 3rem;
+  line-height: 26px;
+}
+.questions > span {
+  font-weight: 700;
+  color: #bebebe;
+}
+.questions p {
+  font-size: 20px;
+  line-height: 1.5;
+}
+.start_quiz p {
+  line-height: 1.5;
+  font-size: 14px;
+  font-weight: 100;
+}
+.answers div {
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: border-color 400ms ease;
+}
+.answers div * {
+  pointer-events: none;
+}
+.answers .radio {
+  display: block;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  cursor: pointer;
+}
+.answers .radio::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: orange;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  border: 0px solid orange;
+}
+.answers .active::before {
+  width: 12px;
+  height: 12px;
+  border-width: 1px;
+}
+.answers .answer {
+  margin-left: 10px;
+}
+.answers div:hover,
+.answers div:hover .radio {
+  border-color: orange;
+}
+.btns {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1.5rem;
+}
+.btns button,
+#show_result {
+  position: absolute;
+  bottom: 20px;
+  padding: 5px 30px;
+  border-radius: 4px;
+  border: none;
+  color: #fff;
+  transition: transform 500ms ease;
+}
+.btns button:hover,
+#show_result:hover {
+  transform: scale(1.1);
+}
+.btns #stop {
+  background-color: orange;
+  left: 20px;
+}
+.btns #next,
+#show_result {
+  background-color: #028a3d;
+  right: 20px;
+}
+#show_result {
+  float: right;
+  margin-top: 1.5rem;
+}
+.save_score input {
+  width: 100%;
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  outline: none;
+}
+.save_score {
+  width: 90%;
+  padding: 20px;
+  background-color: #ddd;
+  border-radius: 4px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10000;
+  text-align: center;
+}
+.users_scores h1 {
+  text-align: center;
+}
+.users_scores div {
+  margin-top: 30px;
+}
+.users_scores {
+  overflow-y: scroll;
+}
+.users_scores::-webkit-scrollbar {
+  width: 4px;
+}
+.users_scores::-webkit-scrollbar-track {
+  background: rgb(102, 102, 102);
+  border-radius: 0 4px 4px 0;
+}
+.users_scores::-webkit-scrollbar-thumb {
+  background-color: #000;
+}
+.users_scores ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 20px;
+  list-style-type: none;
+  padding: 5px 10px;
+  border-bottom: 1px solid #028a3d;
+  font-weight: 600;
+  color: #028a3d;
+}
+.users_scores * {
+  margin: 0;
+  padding: 0;
+}
+.users_scores .back {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translate(-50%);
+}
+.view_score button {
+  background: #0880d6;
+}
+.view_score {
+  position: absolute;
+  bottom: 5rem;
+  left: 50%;
+  transform: translateX(-50%);
 }
